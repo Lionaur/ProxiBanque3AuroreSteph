@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +15,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * JavaBean de la classe Client qui étend la classe abstraite Personne.
- * Comprend les attributs et constructeurs qui sont propres aux clients.
+ * JavaBean de la classe Client. Comprend
+ * les attributs et constructeurs qui sont propres aux clients.
+ * Contient les annotations qui permettent de générer la table "client" en base de données.
  *
  */
 
 @Entity
+
 @ManagedBean
 @Table(name="client")
 public class Client implements Serializable {
@@ -27,9 +30,11 @@ public class Client implements Serializable {
 	private static final long serialVersionUID = 6616955274995509279L;
 
 	//Attributs
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private long id;
+	
 	private String nom;
 	private String prenom;
 	private String adresse;
@@ -51,11 +56,6 @@ public class Client implements Serializable {
 
 
 	//constructeurs
-	public Client(String nom, String prenom) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-	}
 	
 
 	public Client(String nom, String prenom, String adresse, String codepostale, String ville, String tel,
@@ -71,9 +71,21 @@ public class Client implements Serializable {
 		this.ce = ce;
 	}
 
+	public Client(long id, String nom, String prenom) {
+		this.id=id;
+		this.nom = nom;
+		this.prenom = prenom;
+		
+	}
+
+	public Client(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+		
+	}
+
 	public Client(String nom, String prenom, String adresse, String codepostale, String ville, String tel,
 			CompteCourant cc) {
-		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -84,7 +96,6 @@ public class Client implements Serializable {
 	}
 
 	public Client(String nom, String prenom, String adresse, String codepostale, String ville, String tel) {
-		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -92,7 +103,15 @@ public class Client implements Serializable {
 		this.ville = ville;
 		this.tel = tel;
 	}
-
+	public Client(long id,String nom, String prenom, String adresse, String codepostale, String ville, String tel) {
+		this.id=id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.codepostale = codepostale;
+		this.ville = ville;
+		this.tel = tel;
+	}
 	
 	public Client() {
 		super();
@@ -154,6 +173,14 @@ public class Client implements Serializable {
 		this.conseiller = conseiller;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -170,17 +197,15 @@ public class Client implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public int getId() {
-		return id;
-	}
+	
 
 
-	@Override
-	public String toString() {
-		return "Client [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codepostale=" + codepostale
-				+ ", ville=" + ville + ", tel=" + tel + ", cc=" + cc + ", ce=" + ce + ", conseiller=" + conseiller
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Client [nom=" + getNom() + ", prenom=" + getPrenom() + ", adresse=" + adresse + ", codepostale=" + codepostale
+//				+ ", ville=" + ville + ", tel=" + tel + ", cc=" + cc + ", ce=" + ce + ", conseiller=" + conseiller
+//				+ "]";
+//	}
 
 	
 	

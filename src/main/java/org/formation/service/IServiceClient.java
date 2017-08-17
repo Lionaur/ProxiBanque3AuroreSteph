@@ -11,7 +11,8 @@ public interface IServiceClient {
 
 	Client getClient(long idClient) throws Exception;
 
-	void updateClient(Client cli) throws Exception;
 
 	void deleteClient(long idClient) throws Exception;
+
+	void updateClient(long id) throws Exception;
 }

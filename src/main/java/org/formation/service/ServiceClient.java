@@ -9,6 +9,11 @@ import javax.inject.Named;
 import org.formation.dao.IDaoClient;
 import org.formation.model.Client;
 
+/**
+ *Classe servant de couche intermédiaire entre les DaoClient et DaoCompte et la couche présentation. 
+ * Injection d'une instance de chaque dao pour pouvoir utiliser les méthodes des dao.
+ */
+
 @Named
 public class ServiceClient implements IServiceClient, Serializable {
 
@@ -36,8 +41,8 @@ public class ServiceClient implements IServiceClient, Serializable {
 	}
 
 	@Override
-	public void updateClient(Client cli) throws Exception {
-		dao.updateClient(cli);
+	public void updateClient(long id) throws Exception {
+		dao.updateClient(id);
 		
 	}
 
